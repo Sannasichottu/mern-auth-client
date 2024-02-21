@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../App.css";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import {LoginSocialGoogle} from 'reactjs-social-login';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -52,6 +53,22 @@ const Login = () => {
         <p>
           Don't Have Account? <Link to="/signup">Sign Up</Link>
         </p>
+        <div className="flex items-center mt-10 justiofy-between p-10" >
+
+        <div className="">
+          <LoginSocialGoogle 
+          client_id="1075694477544-j18h2clf56ec0o3s8lv4k5c756e0nf7a.apps.googleusercontent.com"
+          access_type="offline"
+          onResolve={({provider,data}) => {
+            console.log(provider,data)
+          }}
+          onReject={(err) => {
+            console.log(err)
+          }}>
+              <Link>Google</Link>
+        </LoginSocialGoogle>
+        </div>
+      </div>
       </form>
     </div>
   );
