@@ -38,7 +38,7 @@ const Signup = () => {
 
         <label htmlFor="email">Email:</label>
         <input
-          type="text"
+          type="email"
           autoComplete="off"
           placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
