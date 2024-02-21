@@ -1,22 +1,21 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const ResetPassword = () => {
-    const [email, setEmail] = useState("");
- 
-
+    const [password,setPassword] = useState("");
+    const {token} = useParams()
     const navigate = useNavigate()
-  
+
     const handleSubmit = (e) => {
       e.preventDefault();
-      axios.post("http://localhost:5000/auth/forgot-password",{
-        email,
+      axios.post("http://localhost:5000/auth/reset-password/"+token,{
+        password,
       }).then(response => {
-        if(response.data.status){
-          alert("check you email for reset password link")
+        if(response.data.status) {
           navigate('/login')
         }
+        console.log(response.data)
       }).catch(err => {
         console.log(err)
       })
@@ -25,17 +24,16 @@ const ResetPassword = () => {
     <div className="sign-up-container">
     <form className="sign-up-form" onSubmit={handleSubmit}>
       <h2>Reset Password</h2>
-      <label htmlFor="email">Email:</label>
+      <label htmlFor="password">New Password:</label>
       <input
-        type="text"
-        autoComplete="off"
-        placeholder="Email"   
-        onChange={(e) => setEmail(e.target.value)}
+        type="password"
+        placeholder="******"   
+        onChange={(e) => setPassword(e.target.value)}
       />
-      <button type="submit">Send</button>
+      <button type="submit">Reset</button>
     </form>
   </div>
   )
 }
 
-export default ResetPassword
+export default ResetPassword;
